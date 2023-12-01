@@ -5,7 +5,7 @@ import 'package:weather_final/services/weather_service_provider.dart';
 import 'package:weather_final/view/home_page.dart';
 
 void main(List<String> args) {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,12 +16,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LocationProvider()),
-        ChangeNotifierProvider(create: (context) => WeatherServiceProvider())
+        ChangeNotifierProvider(
+          create: (context) => WeatherServiceProvider(),
+        )
       ],
       child: MaterialApp(
-        title: "Weather App",
+        title: "weather app",
+        home: const HomeScreen(),
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
         theme: ThemeData(
             appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,

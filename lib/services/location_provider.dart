@@ -3,20 +3,19 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_final/services/location_service.dart';
 
-class LocationProvider with ChangeNotifier {
+class LocationProvider extends ChangeNotifier {
   Position? currentPosition;
-  final LocationService locationService = LocationService();
+  final LocationService _locationService = LocationService();
   Placemark? currentLocationName;
 
-  Future<void> determinePosition() async {
+  Future<void> determinePOsition() async {
     bool serviceEnabled;
     LocationPermission permission;
-
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       currentPosition = null;
       notifyListeners();
-       return;
+      return;
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -24,18 +23,19 @@ class LocationProvider with ChangeNotifier {
       if (permission == LocationPermission.denied) {
         currentPosition = null;
         notifyListeners();
-         return;
+        return;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       currentPosition = null;
       notifyListeners();
-       return;
+      return;
     }
+
     currentPosition = await Geolocator.getCurrentPosition();
     print(currentPosition);
     currentLocationName =
-        await locationService.getLocationName(currentPosition);
+        await _locationService.getLocationName(currentPosition);
     print(currentLocationName);
     notifyListeners();
   }

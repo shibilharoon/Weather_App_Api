@@ -126,7 +126,7 @@ class Weather {
 }
 
 class Main {
-  int? temp;
+  double? temp;
   double? feelsLike;
   double? tempMin;
   double? tempMax;

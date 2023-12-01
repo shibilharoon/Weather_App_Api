@@ -1,9 +1,8 @@
-class APIEndpoints {
+class APIEndPoints {
+  final apikey = "31ff0471651d915b8391169af20ce06d";
 
-  
-  final apiKey = "126bd36cccd70a186becc6a7367fe968";
-//https://api.openweathermap.org/data/2.5/weather?q=dubai&appid=126bd36cccd70a186becc6a7367fe968&units=metric
-
+  // https://api.openweathermap.org/data/2.5/weather?q=dubai&appid=31ff0471651d915b8391169af20ce06d
   final String cityUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+
   final unit = "&units=metric";
 }

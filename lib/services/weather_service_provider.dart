@@ -14,22 +14,24 @@ class WeatherServiceProvider extends ChangeNotifier {
 
   //https://api.openweathermap.org/data/2.5/weather?q=dubai&appid=126bd36cccd70a186becc6a7367fe968&units=metric
 
-  Future<void> fetchWeatherDataByCity(String city) async {
+  Future<void> fetchWeatherDataByCity(String? city) async {
     isloading = true;
     error = "";
 
     try {
       final apiUrl =
-          "${APIEndpoints().cityUrl}$city&appid=${APIEndpoints().apiKey}${APIEndpoints().unit}";
+          "${APIEndPoints().cityUrl}${city}&appid=${APIEndPoints().apikey}${APIEndPoints().unit}";
       print(apiUrl);
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        // print(data);
+
+        print(data);
         weather = WeatherModel.fromJson(data);
-        // print(weather!.name);
-        // notifyListeners();
+        print(weather!.name);
+
+        notifyListeners();
       } else {
         error = "Failed to load data";
       }
@@ -39,6 +41,6 @@ class WeatherServiceProvider extends ChangeNotifier {
       isloading = false;
       notifyListeners();
     }
-    //notifyListeners();
+    notifyListeners();
   }
 }
